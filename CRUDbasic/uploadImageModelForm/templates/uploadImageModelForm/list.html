@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>LIST</title>
+</head>
+<body>
+<h1>LIST PRODUCT</h1>
+
+{% if prod %}
+<table>
+    <thead>
+        <tr>
+            <th>TITLE</th>
+            <th>DESCRIPTION</th>
+            <th>URL</th>
+            <th>IMAGE</th>
+            <th>ACTION</th>
+        </tr>
+    </thead>
+
+    <tbody>
+    {% for p in prod %}
+        <tr>
+            <td>{{p.title}}</td>
+            <td>{{p.description}}</td>
+            <td><a href="{{p.image.url}}">{{p.image.url}}</a></td>
+            <td><img style="height: 80px; width:100px;" src="{{p.image.url}}"></td>
+            <td>
+                <form action="{% url 'proddel' p.id %}" method="post">
+                    {% csrf_token %}
+                    <button type="submit">DELETE</button>
+                </form>
+
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% else %}
+
+<p>No Any Records.</p>
+
+{% endif %}
+
+
+</body>
+</html>

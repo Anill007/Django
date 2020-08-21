@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ENROLL</title>
+    <link rel="stylesheet" href="{% static 'enroll/css/bootstrap.css'%}">
+    <style>
+  .carousel-inner > .item > img,
+  .carousel-inner > .item > a > img {
+    width: 70%;
+    margin: auto;
+  }
+  </style>
+</head>
+<body>
+
+<div class = "container mt-5">
+    <h2 class="text-center alert alert-danger">Function Based View ModelForm--- CRUD</h2>
+    {% block content %}
+    {% endblock content %}
+</div>
+
+
+<script src="{% static 'enroll/js/jquery.js'%}"></script>
+<script src="{% static 'enroll/js/popper.min.js'%}"></script>
+<script src="{% static 'enroll/js/bootstrap.min.js'%}"></script>
+</body>
+</html>

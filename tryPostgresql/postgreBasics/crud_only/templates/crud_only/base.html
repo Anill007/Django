@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      table {
+        font-family: arial, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+      }
+
+      td,
+      th {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
+      }
+
+      tr:nth-child(even) {
+        background-color: #dddddd;
+      }
+    </style>
+  </head>
+
+  <body>
+    {% if product_list %}
+    <h2>Products Table</h2>
+
+    <table>
+      <tr>
+        <th>ID</th>
+        <th>TITLE</th>
+        <th>DESCRIPTION</th>
+        <th>ModelURL</th>
+        <th>IMAGE</th>
+        <th>ACTIONS</th>
+      </tr>
+
+      {% for l in product_list %}
+      <tr>
+        <td>{{l.id}}</td>
+        <td>{{l.Title}}</td>
+        <td>{{l.Description}}</td>
+        <td>
+          <form action="http://127.0.0.1:8000/crud_only/3dview/" method="POST">
+            {% csrf_token %}
+            <input type="hidden" name="url_value" value="{{l.ModelFile.url}}" />
+            <button type="submit">{{l.ModelFile.url}}</button>
+          </form>
+        </td>
+        <td>
+          <img
+            src="{{l.Image.url}}"
+            alt="bgimage"
+            style="height: 80px; width: 80px;"
+          />
+        </td>
+        <td>
+          <a href="http://127.0.0.1:8000/crud_only/edit/{{l.id}}">EDIT</a>
+          <form action="{% url 'delete' l.id %}" method="POST">
+            {% csrf_token %}
+            <button type="submit">DELETE</button>
+          </form>
+        </td>
+      </tr>
+
+      {% endfor %}
+    </table>
+
+    {% else %}
+    <h1>No Any Records.</h1>
+
+    {% endif %}
+  </body>
+
+  <form action="http://127.0.0.1:8000/crud_only/upload/" method="GET">
+    {% csrf_token %}
+    <br />
+    <button type="submit">Upload Product</button>
+  </form>
+</html>
